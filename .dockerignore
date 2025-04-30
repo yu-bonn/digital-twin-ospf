@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+*.log
+venv/
+*.swp
+.DS_Store
+.git
+.gitignore
+.dockerignore
+README.md
+*.tar
+*.img
+*.bin
