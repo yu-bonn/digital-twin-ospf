@@ -2,14 +2,21 @@ import subprocess
 import os
 
 def run_simulation(config_files):
-    simrouting_path = os.path.join(os.path.dirname(__file__), "simrouting")
+    # 正しい simrouting バイナリの位置
+    simrouting_path = os.path.join(
+        os.path.dirname(__file__),
+        "simrouting", "simrouting"
+    )
 
     if not os.path.isfile(simrouting_path):
-        raise FileNotFoundError(f"simrouting not found at {simrouting_path}")
+        raise FileNotFoundError(f"[ERROR] simrouting not found at {simrouting_path}")
 
-    # コマンド構築
+    for f in config_files:
+        if not os.path.isfile(f):
+            raise FileNotFoundError(f"[ERROR] Input file not found: {f}")
+
     cmd = [simrouting_path] + config_files
-    print(f"Running: {' '.join(cmd)}")
+    print(f"[INFO] Running: {' '.join(cmd)}")
 
     try:
         result = subprocess.run(cmd, check=True, capture_output=True, text=True)
@@ -18,8 +25,9 @@ def run_simulation(config_files):
     except subprocess.CalledProcessError as e:
         print("=== Simulation Error ===")
         print(e.stderr)
+        raise
 
 if __name__ == "__main__":
-    # 仮の設定ファイル。必要に応じて置き換えてください。
-    test_files = ["sample/test1.txt"]
+    # 例: config/test1.txt を入力として与える場合
+    test_files = [os.path.join("..", "..", "config", "test1.txt")]
     run_simulation(test_files)

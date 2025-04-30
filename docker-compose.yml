@@ -1,12 +1,17 @@
 version: '3.9'
+
 services:
   dtospf:
-    build: .
+    platform: linux/amd64       # ← build ブロックの外に移動！
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: digital-twin-ospf
     container_name: dtospf
-    platform: linux/amd64
     volumes:
       - ./src:/app/src
       - ./config:/app/config
+      - ./sim_bin:/app/simulator/simrouting/bin
     working_dir: /app
     tty: true
+    stdin_open: true

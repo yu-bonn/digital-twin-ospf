@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # 必要なソースをコピー（simroutingのみ）
-COPY ./src/simulator/simrouting /app/simulator/simrouting
+COPY ./src /app/src
 
 # Pythonライブラリ
 COPY ./requirements.txt /app/requirements.txt
