@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  dtospf:
+    build: .
+    image: digital-twin-ospf
+    container_name: dtospf
+    platform: linux/amd64
+    volumes:
+      - ./src:/app/src
+      - ./config:/app/config
+    working_dir: /app
+    tty: true

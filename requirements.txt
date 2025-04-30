@@ -1,0 +1,5 @@
+pysnmp
+networkx
+scapy
+ansible
+paramiko
